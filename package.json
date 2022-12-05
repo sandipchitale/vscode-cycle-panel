@@ -1,0 +1,92 @@
+{
+    "name": "vscode-cycle-panel",
+	"displayName": "Cycle panel thru closed, normal, maximized",
+	"icon": "images/icon.png",
+	"description": "Cycle panel thru closed, normal, maximized.",
+	"version": "1.0.7",
+	"license": "SEE IN FILE LICENSE",
+    "keywords": [
+        "workbench",
+        "panel"
+    ],
+	"publisher": "sandipchitale",
+    "author": {
+        "name": "Sandip Chitale"
+    },
+    "maintainers": [
+        "Sandip Chitale"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/sandipchitale/vscode-cycle-panel"
+    },
+	"engines": {
+		"vscode": "^1.68.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+        "onCommand:vscode-cycle-panel.closePanel",
+        "onCommand:vscode-cycle-panel.restorePanelWasNotMaximized",
+        "onCommand:vscode-cycle-panel.maximizePanel"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "vscode-cycle-panel.closePanel",
+				"title": "Close Panel",
+				"when": "panelVisible && panelMaximized"
+			},
+			{
+				"command": "vscode-cycle-panel.restorePanelWasNotMaximized",
+				"title": "Restore Panel (was not maximized)",
+				"when": "!panelVisible && !panelMaximized"
+			},
+			{
+				"command": "vscode-cycle-panel.maximizePanel",
+				"title": "Maximize Panel",
+				"when": "panelVisible && && !panelMaximized"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "vscode-cycle-panel.closePanel",
+				"key": "ctrl+shift+alt+P",
+				"when": "panelVisible && panelMaximized"
+			},
+			{
+				"command": "vscode-cycle-panel.restorePanelWasNotMaximized",
+				"key": "ctrl+shift+alt+P",
+				"when": "!panelVisible"
+			},
+			{
+				"command": "vscode-cycle-panel.maximizePanel",
+				"key": "ctrl+shift+alt+P",
+				"when": "panelVisible && !panelMaximized"
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile && npm run lint",
+		"lint": "eslint src --ext ts",
+		"test": "node ./out/test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/vscode": "^1.68.0",
+		"@types/glob": "^7.1.3",
+		"@types/mocha": "^8.2.2",
+		"@types/node": "14.x",
+		"eslint": "^7.27.0",
+		"@typescript-eslint/eslint-plugin": "^4.26.0",
+		"@typescript-eslint/parser": "^4.26.0",
+		"glob": "^7.1.7",
+		"mocha": "^8.4.0",
+		"typescript": "^4.3.2",
+		"vscode-test": "^1.5.2"
+	}
+}
